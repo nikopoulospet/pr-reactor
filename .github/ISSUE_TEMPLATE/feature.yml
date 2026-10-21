@@ -1,0 +1,63 @@
+name: Feature
+description: A product feature that groups related user stories under an epic.
+title: "[Feature] F<n> <name>"
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A feature is a sub-issue of an epic, and its user stories are sub-issues of the feature.
+        After creating it, add it as a sub-issue of its epic.
+  - type: input
+    id: epic
+    attributes:
+      label: Epic
+      description: The parent epic, e.g. #1.
+      placeholder: "#1"
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences on what the feature delivers and for whom.
+    validations:
+      required: true
+  - type: dropdown
+    id: persona
+    attributes:
+      label: Primary persona
+      multiple: true
+      options:
+        - Developer
+        - Repo maintainer
+        - Reviewer or approver
+    validations:
+      required: true
+  - type: input
+    id: requirements
+    attributes:
+      label: PRD requirements
+      description: Functional requirement numbers from the PRD this feature covers.
+      placeholder: "1, 2, 6"
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      multiple: true
+      options:
+        - 1 Observe
+        - 2 Act without the model
+        - 3 Config testing
+        - 4 Judgment hooks live
+        - 5 Second repo
+    validations:
+      required: true
+  - type: textarea
+    id: stories
+    attributes:
+      label: User stories
+      description: Linked as sub-issues of this feature; list them here too for readability.
+      placeholder: "- [ ] #"

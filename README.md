@@ -32,7 +32,7 @@ A simple solution may involve a developer running an AI agent session with cron 
 hooksthrough
 
 - **Developer (primary).** Owns a handful of open PRs at once and wants them driven to approval without babysitting CI, review bots and merge queues. Needs to see where each PR stands, step in when asked, and pause or take back a PR at any time.
-- **Repo maintainer.** Writes and reviews the repo's configuration, custom states and hooks so every developer on the repo gets the same behavior. Needs a stable extension surface and a way to test hooks before they act.
+- **Repo maintainer.** Writes and reviews the repo's configuration, custom states and hooks so every developer on the repo gets the same behavior. Needs a stable extension surface and a way to test configuration before it acts.
 - **Reviewer or approver.** Never runs the reactor but sees its pushes and replies on PRs. Needs replies that are attributable, predictable and only approve or merge where the user's configuration allows it.
 
 ## Key use cases
@@ -42,7 +42,7 @@ hooksthrough
 3. A maintainer adds a repo-specific state (say, `security_review`) and a hook that calls their own script or service, with no change to the reactor.
 4. A maintainer requires CI, adversarial review, security review and design review to pass before a PR can enter human review. These checks run in any order or in parallel, and the PR moves on once the last one passes.
 5. A maintainer swaps the hook behind a judgment call from one agent CLI to another, or to an internal API, by changing the repo's configuration.
-6. A developer runs a new hook in dry-run on live PRs and compares its proposed transitions with what they would have done.
+6. A maintainer tests a configuration change against recorded and hand-written PR scenarios, with hook outputs stubbed, and checks the resulting transitions, actions and rejections before merging it.
 
 ## Requirements
 
@@ -62,7 +62,7 @@ hooksthrough
 12. The reactor's state doesn't depend on any agent session; ending a session loses nothing.
 13. A developer can see each PR's stage, next step, transition history, hook runs and spend from a web page, a CLI or an API, and the view stays current with no model or agent calls.
 14. A developer can pause a PR to take it off the reactor and resume it later, or rerun its last failed hook.
-15. A dry-run mode runs the rules and hooks but changes nothing on GitHub, and shows what would have been pushed and posted.
+15. A config dry-run mode runs the rules against recorded or hand-written PR scenarios with stubbed hook outputs, touches no live PR or GitHub, and reports the transitions and actions that would result.
 16. Every hook's input and output is logged for review.
 
 hook's input and output&#32;
@@ -96,6 +96,6 @@ Each phase ships something usable on its own, and the next one starts only after
 
 1. **Observe.** Track in-scope PRs and show each PR's state and history through the API, the web page and the CLI. No actions yet. *Gate: over a week on the pilot repo, the tracked history matches what actually happened on its PRs, with no missed merge-path changes.*
 2. **Act without the model.** Built-in hooks handle routine events: requesting reviews, notifications, retargeting stacked PRs, and rerunning known infra failures. Ships the default configuration and the pilot repo's configuration. *Gate: the two cron loops are turned off in agent sessions.** Ty*
-3. **Judgment hooks in dry-run.** User-defined hooks run on events that need judgment and propose transitions, replies and commits, but nothing reaches GitHub. *Gate: the developer accepts most proposals unchanged, and no hard-rule violation gets past the reactor's checks.*
+3. **Config testing.** Maintainers run the default and pilot configurations against recorded and hand-written PR scenarios, with hook outputs stubbed; nothing runs on live PRs or reaches GitHub. *Gate: both configurations have passing scenarios covering every transition, and every stubbed proposal that breaks a hard rule is rejected.*
 4. **Judgment hooks live.** Proposals that pass the reactor's checks are applied to GitHub, one repo at a time. *Gate: two weeks on the pilot repo within the spending caps, with no hard-rule violations.*
 5. **Second repo.** Prove the default configuration on a repo that uses native GitHub merging, with no changes to the reactor itself.

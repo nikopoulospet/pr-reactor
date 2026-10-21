@@ -1,0 +1,49 @@
+name: User story
+description: A user story with testable acceptance criteria, under a feature.
+title: "[Story] US-<f>.<n> <short capability>"
+labels: ["user-story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A user story is a sub-issue of a feature. After creating it, add it as a sub-issue of its feature.
+  - type: input
+    id: feature
+    attributes:
+      label: Feature
+      description: The parent feature issue.
+      placeholder: "#2"
+    validations:
+      required: true
+  - type: dropdown
+    id: persona
+    attributes:
+      label: Persona
+      options:
+        - Developer
+        - Repo maintainer
+        - Reviewer or approver
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: Story
+      description: As a <persona>, I want <capability>, so that <outcome>.
+      placeholder: As a developer, I want ..., so that ...
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Testable on the pilot repo, one checkbox per criterion.
+      value: |
+        - [ ] 
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Open questions, dependencies or links.
