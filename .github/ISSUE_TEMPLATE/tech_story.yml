@@ -1,0 +1,66 @@
+name: Tech story
+description: A buildable unit of work under a technical feature.
+title: "[Tech Story] TS-<f>.<n> <short imperative title>"
+labels: ["tech-story"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A tech story is a sub-issue of a technical feature. After creating it, add it as a sub-issue of that feature.
+  - type: input
+    id: feature
+    attributes:
+      label: Technical feature
+      description: The parent technical feature.
+      placeholder: "#34"
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      options:
+        - 1 Observe
+        - 2 Act without the model
+        - 3 Config testing
+        - 4 Judgment hooks live
+        - 5 Second repo
+    validations:
+      required: true
+  - type: textarea
+    id: implements
+    attributes:
+      label: Implements stories
+      description: The user story issues this work contributes to.
+      placeholder: "- #4 US-1.2"
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What to build and why, in the design's terms.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Testable checks, one checkbox each.
+      value: |
+        - [ ] 
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Tech stories or technical features that must land first.
+      placeholder: "- #"
+  - type: textarea
+    id: design
+    attributes:
+      label: Design references
+      description: LLD sections this story comes from.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
