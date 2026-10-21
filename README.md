@@ -1,4 +1,4 @@
-# PR Reactor - PRD
+# PR Reactor
 
 The PR Reactor is a developer-side service that tracks a developer's open PRs on any GitHub repo and runs user-defined hooks as each PR moves through its lifecycle, alongside CI, review bots and people.&#32;
 
