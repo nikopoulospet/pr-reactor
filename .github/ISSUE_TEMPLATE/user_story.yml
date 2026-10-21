@@ -43,6 +43,12 @@ body:
     validations:
       required: true
   - type: textarea
+    id: experience
+    attributes:
+      label: Experience
+      description: What the user actually sees (commands, messages, config). UX direction, not final syntax.
+      render: markdown
+  - type: textarea
     id: notes
     attributes:
       label: Notes
