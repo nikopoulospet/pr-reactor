@@ -1,0 +1,45 @@
+name: Technical feature
+description: A component or subsystem from a low-level design, under the technical epic.
+title: "[Tech] T<n> <component>"
+labels: ["technical-feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A technical feature is a sub-issue of the technical epic. After creating it, add it as a sub-issue of that epic.
+  - type: input
+    id: epic
+    attributes:
+      label: Technical epic
+      description: The parent technical epic.
+      placeholder: "#33"
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      multiple: true
+      options:
+        - 1 Observe
+        - 2 Act without the model
+        - 3 Config testing
+        - 4 Judgment hooks live
+        - 5 Second repo
+    validations:
+      required: true
+  - type: textarea
+    id: stories
+    attributes:
+      label: Implements stories
+      description: The user story issues this component delivers.
+      placeholder: "- #3 US-1.1"
+    validations:
+      required: true
+  - type: textarea
+    id: design
+    attributes:
+      label: Design
+      description: The low-level design, or a link to it. Contracts come from the HLD in the technical epic.
+    validations:
+      required: true
